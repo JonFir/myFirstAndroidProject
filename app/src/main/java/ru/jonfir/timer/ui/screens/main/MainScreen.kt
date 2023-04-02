@@ -3,64 +3,40 @@ package ru.jonfir.timer.ui.screens.main
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import ru.jonfir.timer.library.DefaultPreview
-
-sealed class Screen(val route: String, val hz: String) {
-    object Profile : Screen("profile", "1")
-    object FriendsList : Screen("friendslist", "2")
-}
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    mainViewModel: MainViewModel = viewModel()
+) {
+    val mainUUState by mainViewModel.uiState.collectAsState()
     Scaffold(
         topBar = { MainTopAppBar() },
         bottomBar = {  MainBottomBar() },
-        floatingActionButton = { MainFloatingActionButton() },
+        floatingActionButton = { MainFloatingActionButton(onClick = {
+            mainViewModel.newItem()
+        }) },
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.Center
     ){
-        val itemsList = listOf(
-            MainListItemConfiguration(
-                Icons.Rounded.Home,
-                "Пью чай",
-                "Био",
-                "15"
-            ),
-            MainListItemConfiguration(
-                Icons.Rounded.Home,
-                "Водные процедуры",
-                "Био",
-                "15"
-            ),
-            MainListItemConfiguration(
-                Icons.Rounded.Home,
-                "Зарядка",
-                "Спорт",
-                "20"
-            ),
-            MainListItemConfiguration(
-                Icons.Rounded.Home,
-                "Чтение утренней газеты",
-                "Осознность",
-                "15"
-            ),
-            MainListItemConfiguration(
-                Icons.Rounded.Home,
-                "Запись видео",
-                "Блогинг",
-                "60"
-            ),
-        )
-        Column {
-            itemsList.forEach { item ->
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+        ) {
+            mainUUState.items.forEach { item ->
                 MainListItem(item)
             }
         }
@@ -97,8 +73,8 @@ private fun MainBottomBar() {
 }
 
 @Composable
-private fun MainFloatingActionButton() {
-    FloatingActionButton(onClick = { /* ... */ }) {
+private fun MainFloatingActionButton(onClick: () -> Unit) {
+    FloatingActionButton(onClick = onClick) {
         Icon(Icons.Filled.Add,null)
     }
 }
