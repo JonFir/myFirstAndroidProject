@@ -16,10 +16,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import ru.jonfir.timer.library.DefaultPreview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ru.jonfir.timer.ui.navigation.Navigator
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ActivitiesScreen(
+    navigator: Navigator? = null,
     mainViewModel: ActivitiesScreenViewModel = viewModel()
 ) {
     val mainUUState by mainViewModel.uiState.collectAsState()
@@ -27,7 +29,7 @@ fun ActivitiesScreen(
         topBar = { MainTopAppBar() },
         bottomBar = {  MainBottomBar() },
         floatingActionButton = { MainFloatingActionButton(onClick = {
-            mainViewModel.newItem()
+            navigator?.showActivityCategories()
         }) },
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.Center

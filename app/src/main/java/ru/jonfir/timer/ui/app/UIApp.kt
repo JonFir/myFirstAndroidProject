@@ -5,12 +5,12 @@ import androidx.compose.runtime.Composable
 import ru.jonfir.timer.di.DIContainer
 import ru.jonfir.timer.di.DIContainerPreview
 import ru.jonfir.timer.library.DefaultPreview
-import ru.jonfir.timer.ui.screens.activities.ActivitiesScreen
+import ru.jonfir.timer.ui.navigation.MyAppNavHost
 
 @Composable
 fun UIApp(diContainer: DIContainer) {
     MaterialTheme {
-        ActivitiesScreen()
+        MyAppNavHost()
     }
 }
 
