@@ -1,4 +1,4 @@
-package ru.jonfir.timer.ui.screens.main
+package ru.jonfir.timer.ui.screens.activities
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-data class MainListItemConfiguration(
+data class ActivitiesItemConfiguration(
     val icon: ImageVector,
     val title: String,
     val subtitle: String,
@@ -25,8 +25,8 @@ data class MainListItemConfiguration(
 )
 
 @Composable
-fun MainListItem(
-    configuration: MainListItemConfiguration
+fun ActivitiesListItem(
+    configuration: ActivitiesItemConfiguration
 ) {
     Column {
         Row(

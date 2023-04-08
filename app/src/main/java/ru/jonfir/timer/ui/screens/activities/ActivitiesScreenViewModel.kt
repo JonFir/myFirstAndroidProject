@@ -1,4 +1,4 @@
-package ru.jonfir.timer.ui.screens.main
+package ru.jonfir.timer.ui.screens.activities
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
@@ -8,39 +8,39 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-data class MainUIState(
-    val items: List<MainListItemConfiguration>,
+data class ActivitiesUIState(
+    val items: List<ActivitiesItemConfiguration>,
 )
 
-class MainViewModel: ViewModel() {
+class ActivitiesScreenViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(
-        MainUIState(
+        ActivitiesUIState(
             items = listOf(
-                MainListItemConfiguration(
+                ActivitiesItemConfiguration(
                     Icons.Rounded.Home,
                     "Пью чай",
                     "Био",
                     "15"
                 ),
-                MainListItemConfiguration(
+                ActivitiesItemConfiguration(
                     Icons.Rounded.Home,
                     "Водные процедуры",
                     "Био",
                     "15"
                 ),
-                MainListItemConfiguration(
+                ActivitiesItemConfiguration(
                     Icons.Rounded.Home,
                     "Зарядка",
                     "Спорт",
                     "20"
                 ),
-                MainListItemConfiguration(
+                ActivitiesItemConfiguration(
                     Icons.Rounded.Home,
                     "Чтение утренней газеты",
                     "Осознность",
                     "15"
                 ),
-                MainListItemConfiguration(
+                ActivitiesItemConfiguration(
                     Icons.Rounded.Home,
                     "Запись видео",
                     "Блогинг",
@@ -49,12 +49,12 @@ class MainViewModel: ViewModel() {
             )
         )
     )
-    val uiState: StateFlow<MainUIState> = _uiState.asStateFlow()
+    val uiState: StateFlow<ActivitiesUIState> = _uiState.asStateFlow()
 
     fun newItem() {
         _uiState.update {
             it.copy(
-                items = it.items.plus(MainListItemConfiguration(
+                items = it.items.plus(ActivitiesItemConfiguration(
                     Icons.Rounded.Home,
                     "Чтение утренней газеты",
                     "Осознность",
