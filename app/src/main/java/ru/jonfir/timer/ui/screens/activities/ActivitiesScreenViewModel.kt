@@ -1,7 +1,7 @@
 package ru.jonfir.timer.ui.screens.activities
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.Home
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,39 +12,24 @@ data class ActivitiesUIState(
     val items: List<ActivitiesItemConfiguration>,
 )
 
-class ActivitiesScreenViewModel: ViewModel() {
+class ActivitiesScreenViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(
         ActivitiesUIState(
             items = listOf(
                 ActivitiesItemConfiguration(
-                    Icons.Rounded.Home,
-                    "Пью чай",
-                    "Био",
-                    "15"
+                    Icons.Rounded.Home, "Пью чай", "Био", "15"
                 ),
                 ActivitiesItemConfiguration(
-                    Icons.Rounded.Home,
-                    "Водные процедуры",
-                    "Био",
-                    "15"
+                    Icons.Rounded.Home, "Водные процедуры", "Био", "15"
                 ),
                 ActivitiesItemConfiguration(
-                    Icons.Rounded.Home,
-                    "Зарядка",
-                    "Спорт",
-                    "20"
+                    Icons.Rounded.Home, "Зарядка", "Спорт", "20"
                 ),
                 ActivitiesItemConfiguration(
-                    Icons.Rounded.Home,
-                    "Чтение утренней газеты",
-                    "Осознность",
-                    "15"
+                    Icons.Rounded.Home, "Чтение утренней газеты", "Осознность", "15"
                 ),
                 ActivitiesItemConfiguration(
-                    Icons.Rounded.Home,
-                    "Запись видео",
-                    "Блогинг",
-                    "60"
+                    Icons.Rounded.Home, "Запись видео", "Блогинг", "60"
                 ),
             )
         )
@@ -54,12 +39,11 @@ class ActivitiesScreenViewModel: ViewModel() {
     fun newItem() {
         _uiState.update {
             it.copy(
-                items = it.items.plus(ActivitiesItemConfiguration(
-                    Icons.Rounded.Home,
-                    "Чтение утренней газеты",
-                    "Осознность",
-                    "15"
-                ))
+                items = it.items.plus(
+                    ActivitiesItemConfiguration(
+                        Icons.Rounded.Home, "Чтение утренней газеты", "Осознность", "15"
+                    )
+                )
             )
         }
     }

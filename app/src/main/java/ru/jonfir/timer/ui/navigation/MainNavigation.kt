@@ -2,12 +2,15 @@ package ru.jonfir.timer.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ru.jonfir.timer.di.DIContainer
 import ru.jonfir.timer.ui.screens.activities.ActivitiesScreen
-import ru.jonfir.timer.ui.screens.activities.categories.ActivityCategories
+import ru.jonfir.timer.ui.screens.activities.categories.ActivityCategoriesScreen
+import ru.jonfir.timer.ui.screens.activities.categories.ActivityCategoriesViewModel
 
 object ScreenNames {
     const val ACTIVITIES = "activities"
@@ -26,21 +29,23 @@ class Navigator(
 
 @Composable
 fun MyAppNavHost(
+    diContainer: DIContainer,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = ScreenNames.ACTIVITIES
 ) {
     val navigator = Navigator(navController)
     NavHost(
-        modifier = modifier,
-        navController = navController,
-        startDestination = startDestination
+        modifier = modifier, navController = navController, startDestination = startDestination
     ) {
         composable(ScreenNames.ACTIVITIES) {
             ActivitiesScreen(navigator)
         }
         composable(ScreenNames.ACTIVITY_CATEGORIES) {
-            ActivityCategories()
+            val vm: ActivityCategoriesViewModel = viewModel(
+                factory = ActivityCategoriesViewModel.provideFactory(diContainer.activityCategoriesRepository)
+            )
+            ActivityCategoriesScreen(vm)
         }
     }
 }
